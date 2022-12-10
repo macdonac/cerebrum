@@ -16,18 +16,7 @@ intents.message_content = True
 
 bot = commands.Bot(intents=intents, command_prefix='!')
 openai.api_key = os.getenv('OPENAI_API_KEY')
-#client = discord.Client(intents=discord.Intents.default())
 
-# @client.event
-# async def on_ready():
-#     print(f'{client.user}\'s wrinkled brain has arrived!')
-
-# @client.event
-# async def on_member_join(member):
-#     await member.create_dm()
-#     await member.dm_channel.send(
-#         f'Howdy {member.name}, I hope you cleaned your toes!'
-#     )
 
 # @client.event
 # async def on_message(message):
@@ -50,6 +39,26 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
     # elif message.content == 'raise-exception':
     #     raise discord.DiscordException
 
+@bot.event
+async def on_ready():
+    text_channel_list = []
+    for guild in bot.guilds:
+        for channel in guild.channels:
+            if str(channel.type) == 'text':
+                if(str(channel) == 'general'):
+                    text_channel_list.append(channel)
+
+    for server in text_channel_list:
+        await server.send('Cerebrum\'s wrinkled brain has arrived!')
+
+    print('Cerebrum\'s wrinkled brain has arrived!')
+
+@bot.event
+async def on_member_join(member):
+    await member.create_dm()
+    await member.dm_channel.send(
+        f'Howdy {member.name}, I hope you cleaned your toes!'
+    )
 
 @bot.command(name='bitch')
 async def bitch(ctx):
