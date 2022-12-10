@@ -57,7 +57,7 @@ async def bitch(ctx):
 
 
 @bot.command(name='?')
-async def bitch(ctx):
+async def ask_chatGPT(ctx):
     #openai.Model.list()
     prompt = ctx.message.content
     prompt = prompt.replace('!?', '')
