@@ -41,15 +41,15 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 
 @bot.event
 async def on_ready():
-    text_channel_list = []
-    for guild in bot.guilds:
-        for channel in guild.channels:
-            if str(channel.type) == 'text':
-                if(str(channel) == 'general'):
-                    text_channel_list.append(channel)
+    # text_channel_list = []
+    # for guild in bot.guilds:
+    #     for channel in guild.channels:
+    #         if str(channel.type) == 'text':
+    #             if(str(channel) == 'general'):
+    #                 text_channel_list.append(channel)
 
-    for server in text_channel_list:
-        await server.send('Cerebrum\'s wrinkled brain has arrived!')
+    # for server in text_channel_list:
+    #     await server.send('Cerebrum\'s wrinkled brain has arrived!')
 
     print('Cerebrum\'s wrinkled brain has arrived!')
 
@@ -69,12 +69,13 @@ async def bitch(ctx):
 async def ask_chatGPT(ctx):
     #openai.Model.list()
     prompt = ctx.message.content
+    print(prompt)
     prompt = prompt.replace('!?', '')
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt,
         temperature=0.9,
-        max_tokens=150,
+        max_tokens=2500,
         top_p=1,
         frequency_penalty=0.0,
         presence_penalty=0.6,
