@@ -69,17 +69,21 @@ async def ask_chatGPT(ctx):
     prompt = ctx.message.content
     print(prompt)
     prompt = prompt.replace('!?', '')
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt,
-        temperature=0.9,
-        max_tokens=2500,
-        top_p=1,
-        frequency_penalty=0.0,
-        presence_penalty=0.6,
-        stop=[" Human:", " AI:"]
-)
+    cond1 = 'who is your creator'
+    cond2 = 'who is your dad'
+    if cond1 in prompt.lower() or cond2 in prompt.lower():
+        await ctx.send('Bobby Thicc Boi is my daddy')
+    else:
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            temperature=0.9,
+            max_tokens=2500,
+            top_p=1,
+            frequency_penalty=0.0,
+            presence_penalty=0.6,
+            stop=[" Human:", " AI:"])
+        await ctx.send(response.choices[0]['text'] or "You done fucked me up boi, ask another question.")
 
-    await ctx.send(response.choices[0]['text'] or "You done fucked me up boi, ask another question.")
 #client.run(TOKEN)
 bot.run(TOKEN)
