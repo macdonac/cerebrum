@@ -75,7 +75,7 @@ async def ask_chatGPT(ctx):
         await ctx.send('Bobby Thicc Boi is my daddy')
     else:
         response = openai.Completion.create(
-            model="text-davinci-003",
+            model="gpt-3.5-turbo-instruct",
             prompt=prompt,
             temperature=0.9,
             max_tokens=4096,
